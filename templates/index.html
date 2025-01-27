@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            background-image: url("/static/back.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: #005f73;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .navbar .title {
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #0a9396;
+            border-radius: 5px;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            margin: 20px auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border-radius: 10px;
+            max-width: 800px;
+        }
+
+        h1 {
+            color: #0a9396;
+            margin-bottom: 20px;
+        }
+
+        .upload-label {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .upload-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #005f73;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .upload-button:hover {
+            background-color: #0a9396;
+        }
+
+        .image-container {
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 400px;
+            border: 2px solid #005f73;
+            border-radius: 10px;
+        }
+
+        .prediction-label {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        #errorLabel {
+            color: red;
+        }
+
+        #uploadAgainButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #e4d3b4, #86bce3);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #uploadAgainButton:hover {
+            background: linear-gradient(45deg, #ca6702, #95c1eb);
+        }
+
+        footer {
+            background-color: #005f73;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="title"><img src="/static/Screenshot 2024-12-24 084242.png" alt="logo" width="35px" height="30px">Breast Cancer Detection</div>
+        <div class="navbar-links">
+            <a href="#home" onclick="showSection('home')">Home</a>
+            <a href="#about" onclick="showSection('about')">About Project</a>
+            <a href="#predictions" onclick="showSection('predictions')">Predictions</a>
+            <a href="#metrics" onclick="showSection('metrics')">Model Evaluation Metrics</a>
+            <a href="#flowchart" onclick="showSection('flowchart')">Project Flowchart</a>
+        </div>
+    </div>
+
+    <div id="home" class="container">
+        <h1>Welcome to the Breast Cancer Detection Project</h1>
+        <p>This project uses advanced bio-inspired algorithms and lightweight models to detect breast cancer from mammographic images. The aim is to provide accurate and efficient predictions to assist medical professionals in their diagnosis.</p>
+    </div>
+
+    <div id="about" class="container hidden">
+        <h1>About the Project</h1>
+        <p>
+            Breast cancer is one of the most common types of cancer affecting women worldwide. Early detection 
+            significantly increases the chances of successful treatment and survival. However, traditional methods of 
+            diagnosis can sometimes be time-consuming and prone to human error.
+        </p>
+
+        <h2>Our Solution</h2>
+        <p>
+            To address this issue, we have developed an innovative solution using advanced bio-inspired algorithms 
+            and lightweight machine learning models. Our system:
+        </p>
+        <ul>
+            <li>Utilizes enhanced imaging techniques for accurate feature extraction.</li>
+            <li>Employs Genetic Algorithms for optimal feature selection, reducing noise and improving detection accuracy.</li>
+            <li>Implements efficient classification models like MobileNetV2 to ensure fast and accurate predictions.</li>
+            <li>Focuses on delivering a user-friendly platform for healthcare professionals to support decision-making.</li>
+        </ul>
+
+        <p>
+            With this approach, we aim to provide a cost-effective and reliable tool to aid in the early detection 
+            of breast cancer, ultimately contributing to improved patient outcomes and healthcare efficiency.
+        </p>
+    </div>
+
+    <div id="predictions" class="container hidden">
+        <h1>Upload an Image for Prediction</h1>
+        <p class="upload-label">Upload an Image to Predict</p>
+        <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.bmp,.gif,.tiff" />
+        <button class="upload-button" onclick="predictImage()">Predict</button>
+
+        <div class="image-container hidden">
+            <img id="uploadedImage" src="" alt="Uploaded Image" />
+        </div>
+
+        <p id="predictionLabel" class="prediction-label"></p>
+        <p id="errorLabel" class="prediction-label"></p>
+        <button id="uploadAgainButton" onclick="uploadAgain()" class="hidden">Upload Again</button>
+    </div>
+
+    <div id="metrics" class="container hidden">
+        <h1>Model Evaluation Metrics</h1>
+        <p>The evaluation metrics include accuracy, precision, recall, and F1-score. Our model achieves a remarkable accuracy of 98.88% using Genetic Algorithms for feature selection and optimization.</p>
+        <img src="/static/Screenshot 2024-09-05 194625.png" alt="performance" width="550px" height="450px">
+    </div>
+
+    <div id="flowchart" class="container hidden">
+        <h1>Project Flowchart</h1>
+        <p>The project workflow includes stages such as preprocessing, feature extraction, optimization, and classification. Each step is designed to enhance the detection accuracy while maintaining computational efficiency.</p>
+        <img src="/static/image.png" alt="flowchart" width="550px" height="450px">
+    </div>
+
+    <footer>
+        &copy; 2024 Breast Cancer Detection Project. All rights reserved.
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.container');
+            sections.forEach(section => section.classList.add('hidden'));
+
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.remove('hidden');
+            }
+        }
+
+        function predictImage() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("No file chosen");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const predictionLabel = document.getElementById('predictionLabel');
+                    const errorLabel = document.getElementById('errorLabel');
+                    const uploadAgainButton = document.getElementById('uploadAgainButton');
+
+                    if (data.error) {
+                        errorLabel.textContent = data.error;
+                        errorLabel.style.display = 'block';
+                    } else {
+                        const uploadedImage = document.getElementById('uploadedImage');
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function (e) {
+                            uploadedImage.src = e.target.result;
+                            uploadedImage.parentElement.style.display = 'block';
+                        };
+
+                        predictionLabel.textContent = `Predicted class: ${data.prediction}`;
+                        predictionLabel.style.display = 'block';
+                    }
+
+                    uploadAgainButton.classList.remove('hidden');
+                    document.querySelector('.upload-button').style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    const errorLabel = document.getElementById('errorLabel');
+                    errorLabel.textContent = 'An error occurred while predicting. Please try again.';
+                    errorLabel.style.display = 'block';
+                });
+        }
+
+        function uploadAgain() {
+            document.getElementById('fileInput').value = '';
+            document.querySelector('.upload-button').style.display = 'block';
+            document.getElementById('uploadedImage').src = '';
+            document.getElementById('uploadedImage').parentElement.style.display = 'none';
+            document.getElementById('predictionLabel').textContent = '';
+            document.getElementById('errorLabel').textContent = '';
+            document.getElementById('uploadAgainButton').classList.add('hidden');
+
+            // Show the predictions section again
+            showSection('predictions');
+        }
+
+        // Ensure the predictions section is shown if navigated via navbar
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const targetId = e.target.getAttribute('href').substring(1);
+                showSection(targetId);
+            });
+        });
+
+        // Initial display of predictions section if #predictions is in the URL
+        if (window.location.hash === '#predictions') {
+            showSection('predictions');
+        }
+    </script>
+</body>
+</html>
