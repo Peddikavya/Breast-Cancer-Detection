@@ -121,6 +121,26 @@
             background: linear-gradient(45deg, #ca6702, #95c1eb);
         }
 
+        .metrics-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.metrics-container img {
+    width: 48%;  /* Ensures equal width for all images */
+    height: 300px; /* Fixed height for uniformity */
+    object-fit: contain; /* Displays the whole image without cropping */
+    border: 2px solid #005f73;
+    border-radius: 10px;
+    background-color: white; /* Ensures images with transparency appear correctly */
+}
+
+
+
+
         footer {
             background-color: #005f73;
             color: white;
@@ -195,13 +215,20 @@
     <div id="metrics" class="container hidden">
         <h1>Model Evaluation Metrics</h1>
         <p>The evaluation metrics include accuracy, precision, recall, and F1-score. Our model achieves a remarkable accuracy of 98.88% using Genetic Algorithms for feature selection and optimization.</p>
-        <img src="/static/Screenshot 2024-09-05 194625.png" alt="performance" width="550px" height="450px">
-    </div>
+        
+        <div class="metrics-container">
+            <img src="/static/Screenshot 2024-09-05 194625.png" alt="performance">
+            <img src="/static/Screenshot 2025-02-25 182936.png" alt="comparison">
+            <img src="/static/Screenshot 2024-12-29 112535.png" alt="accuracyvsloss">
+            <img src="/static/Screenshot 2024-09-05 222712.png" alt="curve">
+        </div>
+    </div>    
 
     <div id="flowchart" class="container hidden">
         <h1>Project Flowchart</h1>
         <p>The project workflow includes stages such as preprocessing, feature extraction, optimization, and classification. Each step is designed to enhance the detection accuracy while maintaining computational efficiency.</p>
         <img src="/static/image.png" alt="flowchart" width="550px" height="450px">
+        <p>The given flowchart represents the overall workflow of the project, which follows a structured approach for efficient processing and classification. The process begins with Preprocessing, where raw data undergoes enhancement techniques to improve its quality and highlight relevant features. Next, Feature Extraction is performed to derive meaningful information from the preprocessed data, ensuring that only the most significant attributes are considered for further analysis. The Optimization phase fine-tunes the extracted features using advanced algorithms to improve the accuracy and efficiency of the model. Finally, the Classification stage categorizes the data based on the refined features, ensuring precise and reliable predictions. This structured pipeline helps in achieving high detection accuracy while maintaining computational efficiency.</p>
     </div>
 
     <footer>
