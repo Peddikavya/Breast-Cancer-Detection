@@ -40,10 +40,12 @@ git clone https://github.com/Peddikavya/Breast-Cancer-Detection/
 If you haven’t installed the libraries yet, run:
 
 pip install -r requirements.txt
+
 3. Run the Flask app
 Now, you can run the Flask application with the following command:
 
 python app.py
+
 4. Access the app
 Once the Flask server starts, open your browser and go to:
 
